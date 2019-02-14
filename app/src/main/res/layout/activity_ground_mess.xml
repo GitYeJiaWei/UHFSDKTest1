@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
+
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/error"/>
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/md_red_500"
+            android:text="请扫描RFID标签"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:text="RFID标签"/>
+
+    <EditText
+        android:layout_margin="5dp"
+        android:id="@+id/et_biaoqian"
+        android:singleLine="true"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:enabled="false"
+        android:hint="请扫描RFID标签"
+        android:background="@drawable/back_text"
+        android:gravity="center"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="35dp"
+                android:background="@drawable/back_left"
+                android:gravity="center"
+                android:text="序号"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="35dp"
+                android:background="@drawable/back_left"
+                android:gravity="center"
+                android:text="RFID标签"/>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lv_scan"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="270dp">
+
+        </ListView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:textSize="18sp"
+                android:text="扫描数"/>
+
+            <EditText
+                android:id="@+id/edt_saomiao"
+                android:singleLine="true"
+                android:enabled="false"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ed_height"
+                android:background="@drawable/back_text"
+                android:gravity="center"
+                android:text="0"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:textSize="18sp"
+                android:text="差异数"/>
+
+            <EditText
+                android:id="@+id/edt_chayi"
+                android:singleLine="true"
+                android:enabled="false"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ed_height"
+                android:background="@drawable/back_text"
+                android:gravity="center"
+                android:text="0"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_scan"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_alignParentBottom="true"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:text="@string/ware_scan"/>
+
+            <Button
+                android:id="@+id/bt_sure"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_alignParentBottom="true"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:text="@string/ware_sure"/>
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:text="@string/ware_cancle"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

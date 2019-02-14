@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">台式群读</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="error_unkown">未知错误</string>
+    <string name="error_http">网络连接错误</string>
+    <string name="error_system">服务器出错</string>
+    <string name="error_account_freeze">账户被冻结，请联系管理员</string>
+    <string name="error_api_no_perission">调用了无权限的API接口</string>
+    <string name="error_login">用户名或者密码错误</string>
+    <string name="error_http_400">bad request</string>
+    <string name="error_http_404">服务器资源找不到</string>
+    <string name="error_http_500">服务器错误</string>
+    <string name="error_socket_timeout">网络超时</string>
+    <string name="error_socket_unreachable">网络不可用</string>
+
+    <!-- Options available in the Navigation Drawer of the application -->
+    <string-array name="options_array">
+        <item>主菜单</item>
+        <item>设置</item>
+        <item>退出</item>
+
+        <item>收货</item>
+        <item>上架</item>
+        <item>拣货</item>
+        <item>库存移动</item>
+        <item>库存查询</item>
+        <item>库存盘点</item>
+        <item>系统设置</item>
+
+    </string-array>
+
+    <string name="ware_sure">确定</string>
+    <string name="ware_cancle">取消</string>
+    <string name="ware_scan">扫描</string>
+</resources>
