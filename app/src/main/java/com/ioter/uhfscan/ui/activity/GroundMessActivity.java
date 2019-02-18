@@ -48,6 +48,7 @@ public class GroundMessActivity extends NewBaseActivity {
     private ArrayList<EPC> epcList = new ArrayList<>();
     private RecevieScamadapter recevieScamadapter = null;
     private String bar = null;
+    private int user=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,18 @@ public class GroundMessActivity extends NewBaseActivity {
         recevieScamadapter = new RecevieScamadapter(this);
         lvScan.setAdapter(recevieScamadapter);
         bar = getIntent().getStringExtra("barCode");
+
+        String warehouse = ACache.get(AppApplication.getApplication()).getAsString("spinner");
+        Query<EpcModel> nQuery = getEpcModelDao().queryBuilder()
+                .where(EpcModelDao.Properties.Warehouse.eq(warehouse))
+                .where(EpcModelDao.Properties.Casecode.eq(bar)).build();
+        List<EpcModel> users = nQuery.list();
+        if (users==null || users.size()==0){
+            ToastUtil.toast("不存在该箱码，请确认出库箱码");
+            return;
+        }
+        user = users.size();
+        edtChayi.setText(users.size()+"");
     }
 
     //获取EPC群读数据
@@ -78,6 +91,7 @@ public class GroundMessActivity extends NewBaseActivity {
         epcList.add(epc);
         recevieScamadapter.updateDatas(epcList);
         edtSaomiao.setText(epcList.size() + "");
+        edtChayi.setText(user-epcList.size()+"");
     }
 
     private void getPressDialog(String content) {

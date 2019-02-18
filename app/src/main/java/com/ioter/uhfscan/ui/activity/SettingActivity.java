@@ -6,13 +6,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ioter.uhfscan.AppApplication;
 import com.ioter.uhfscan.R;
+import com.ioter.uhfscan.bean.Spin;
 import com.ioter.uhfscan.common.util.ACache;
+import com.ioter.uhfscan.common.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +58,18 @@ public class SettingActivity extends NewBaseActivity implements SeekBar.OnSeekBa
     SeekBar seekBar4;
     @BindView(R.id.tvShow4)
     TextView tvShow4;
+    @BindView(R.id.et_warehouse)
+    EditText etWarehouse;
+    @BindView(R.id.btn_add)
+    Button btnAdds;
+    @BindView(R.id.btn_del)
+    Button btnDels;
+    @BindView(R.id.btn_sure)
+    TextView btnSures;
+    @BindView(R.id.li_warehouse)
+    LinearLayout liWarehouse;
+    private ArrayList<Spin> spinnerList;
+    private boolean stage = true;
     private String selected = null;
 
     @Override
@@ -65,6 +81,58 @@ public class SettingActivity extends NewBaseActivity implements SeekBar.OnSeekBa
         setTitle("设置");
         initview();
 
+    }
+
+    private void setSpinner(){
+        spinnerList = (ArrayList<Spin>) ACache.get(AppApplication.getApplication()).getAsObject("spinnerList");
+        if (spinnerList==null || spinnerList.size()==0){
+            spinnerList = new ArrayList<>();
+            Spin spin = new Spin();
+            spin.setName("集美");
+            spinnerList.add(spin);
+            ACache.get(AppApplication.getApplication()).put("spinnerList",spinnerList);
+        }
+        /*
+         * 动态添显示下来菜单的选项，可以动态添加元素
+         */
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < spinnerList.size(); i++) {
+            list.add(spinnerList.get(i).getName());
+        }
+        /*
+         * 第二个参数是显示的布局
+         * 第三个参数是在布局显示的位置id
+         * 第四个参数是将要显示的数据
+         */
+        ArrayAdapter adapter2 = new ArrayAdapter(this, R.layout.item, R.id.text_item, list);
+        spCangku.setAdapter(adapter2);
+
+        selected = ACache.get(AppApplication.getApplication()).getAsString("spinner");
+        if (TextUtils.isEmpty(selected)) {
+            selected = list.get(0);
+            spCangku.setSelection(0, true);
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                if (selected.equals(list.get(i))) {
+                    //设置默认值
+                    spCangku.setSelection(i, true);
+                    selected = list.get(i);
+                }
+            }
+        }
+
+        spCangku.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //将选择的元素显示出来
+                selected = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void initview() {
@@ -101,52 +169,11 @@ public class SettingActivity extends NewBaseActivity implements SeekBar.OnSeekBa
         seekBar3.setOnSeekBarChangeListener(this);
         seekBar4.setOnSeekBarChangeListener(this);
 
-        /*
-         * 动态添显示下来菜单的选项，可以动态添加元素
-         */
-        List<String> list = new ArrayList<>();
-        list.add("集美");
-        list.add("同安");
-        list.add("湖里");
-        list.add("思明");
-        /*
-         * 第二个参数是显示的布局
-         * 第三个参数是在布局显示的位置id
-         * 第四个参数是将要显示的数据
-         */
-        ArrayAdapter adapter2 = new ArrayAdapter(this, R.layout.item, R.id.text_item, list);
-        spCangku.setAdapter(adapter2);
-
-        selected = ACache.get(AppApplication.getApplication()).getAsString("spinner");
-        if (TextUtils.isEmpty(selected)) {
-            selected = "集美";
-            spCangku.setSelection(0, true);
-        } else {
-            for (int i = 0; i < list.size(); i++) {
-                if (selected.equals(list.get(i))) {
-                    //设置默认值
-                    spCangku.setSelection(i, true);
-                    selected = list.get(i);
-                }
-            }
-        }
-
-        spCangku.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //将选择的元素显示出来
-                selected = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        setSpinner();
     }
 
 
-    @OnClick({R.id.bt_sure, R.id.btn_cancel})
+    @OnClick({R.id.bt_sure, R.id.btn_cancel, R.id.btn_add, R.id.btn_del, R.id.btn_sure})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_sure:
@@ -160,10 +187,59 @@ public class SettingActivity extends NewBaseActivity implements SeekBar.OnSeekBa
                 ACache.get(AppApplication.getApplication()).put("key4", key4);
 
                 ACache.get(AppApplication.getApplication()).put("spinner", selected);
+                ACache.get(AppApplication.getApplication()).put("spinnerList",spinnerList);
+
                 finish();
                 break;
             case R.id.btn_cancel:
                 finish();
+                break;
+            case R.id.btn_add:
+                if (liWarehouse.getVisibility()==View.VISIBLE){
+                    liWarehouse.setVisibility(View.GONE);
+                }else {
+                    liWarehouse.setVisibility(View.VISIBLE);
+                }
+                stage = true;
+                break;
+            case R.id.btn_del:
+                if (liWarehouse.getVisibility()==View.VISIBLE){
+                    liWarehouse.setVisibility(View.GONE);
+                }else {
+                    liWarehouse.setVisibility(View.VISIBLE);
+                    etWarehouse.setText(selected);
+                }
+                stage = false;
+                break;
+            case R.id.btn_sure:
+                if (stage){
+                    String name = etWarehouse.getText().toString();
+                    if (TextUtils.isEmpty(name)){
+                        ToastUtil.toast("请输入仓库名");
+                    }else {
+                        Spin spin = new Spin();
+                        spin.setName(name);
+                        spinnerList.add(spin);
+                        ACache.get(AppApplication.getApplication()).put("spinner", name);
+                        ACache.get(AppApplication.getApplication()).put("spinnerList",spinnerList);
+                        liWarehouse.setVisibility(View.GONE);
+                        setSpinner();
+                    }
+                }else {
+                    String name = etWarehouse.getText().toString();
+                    if (TextUtils.isEmpty(name)){
+                        ToastUtil.toast("请输入仓库名");
+                    }else {
+                        for (int i = 0; i < spinnerList.size(); i++) {
+                            if (spinnerList.get(i).getName().equals(name)){
+                                spinnerList.remove(spinnerList.get(i));
+                            }
+                        }
+                        ACache.get(AppApplication.getApplication()).put("spinnerList",spinnerList);
+                        liWarehouse.setVisibility(View.GONE);
+                        setSpinner();
+                    }
+                }
                 break;
         }
     }

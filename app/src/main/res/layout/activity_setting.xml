@@ -56,6 +56,52 @@
             android:layout_height="match_parent"
             />
 
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/add"/>
+
+        <Button
+            android:id="@+id/btn_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/delete"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/li_warehouse"
+        android:padding="5dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_warehouse"
+            android:singleLine="true"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="35dp"
+            android:background="@drawable/back_text"
+            android:hint="请输入仓库名"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/btn_sure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:text="确定"
+            />
     </LinearLayout>
 
     <LinearLayout

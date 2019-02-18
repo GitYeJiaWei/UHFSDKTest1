@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -16,8 +17,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.ioter.uhfscan.AppApplication;
 import com.ioter.uhfscan.R;
 import com.ioter.uhfscan.common.ActivityCollecter;
+import com.ioter.uhfscan.common.util.ACache;
 import com.ioter.uhfscan.ui.adapter.DrawerListAdapter;
 import com.ioter.uhfscan.ui.adapter.DrawerListContent;
 import com.ioter.uhfscan.ui.fragment.HomeFragment;
@@ -47,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
         initview();
         if (savedInstanceState == null) {
             selectItem(0);
+        }
+
+        String warehouse = ACache.get(AppApplication.getApplication()).getAsString("spinner");
+        if (TextUtils.isEmpty(warehouse)){
+            ACache.get(AppApplication.getApplication()).put("spinner", "集美");
         }
     }
 

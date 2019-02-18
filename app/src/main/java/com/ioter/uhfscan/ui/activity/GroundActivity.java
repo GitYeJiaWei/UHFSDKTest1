@@ -69,7 +69,7 @@ public class GroundActivity extends NewBaseActivity {
             result += fnString.keyCodeToChar(keyCode, hasShift);
             hasShift = (keyCode == KeyEvent.KEYCODE_SHIFT_LEFT);
         }
-        etDanhao.setText(result);
+        etDanhao.setText(result.toUpperCase());
         //扫条码
         takeData();
         scannedCodes.clear();
