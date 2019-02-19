@@ -91,7 +91,7 @@ public class CheckMessActivity extends NewBaseActivity {
 
         checkAdapter.updateDatas(epcList);
         edtSaomiao.setText(conMap.size() + "");
-        edtChayi.setText(conMap.size() - a + "");
+        edtChayi.setText(a - conMap.size()+ "");
     }
 
     private void getPressDialog(String content) {
@@ -156,6 +156,7 @@ public class CheckMessActivity extends NewBaseActivity {
         checkAdapter.updateDatas(epcList);
         edtYuqi.setText(epcList.size() + "");
         a = epcList.size();
+        edtChayi.setText(epcList.size()+ "");
     }
 
     @OnClick({R.id.bt_sure, R.id.btn_cancel,R.id.bt_scan})

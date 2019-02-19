@@ -63,4 +63,7 @@
     <dimen name="reader_list_item_padding">5dp</dimen>
 
     <dimen name="ed_height">35dp</dimen>
+    <dimen name="ed_high">100dp</dimen>
+    <dimen name="ed_highht">70sp</dimen>
+
 </resources>

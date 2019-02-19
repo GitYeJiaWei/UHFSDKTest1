@@ -118,7 +118,7 @@ public class CheckDataActivity extends NewBaseActivity {
         }
         checkDataAdapter.updateDatas(epcList);
         edtSaomiao.setText(saomiao + "");
-        edtChayi.setText(saomiao - a + "");
+        edtChayi.setText(a - saomiao+ "");
     }
 
     private void getPressDialog(String content) {
@@ -190,6 +190,7 @@ public class CheckDataActivity extends NewBaseActivity {
         }
         checkDataAdapter.updateDatas(epcList);
         edtYuqi.setText(users.size() + "");
+        edtChayi.setText(users.size() +  "");
         a = users.size();
     }
 

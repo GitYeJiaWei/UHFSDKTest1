@@ -114,9 +114,11 @@
                 android:singleLine="true"
                 android:enabled="false"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/ed_height"
+                android:layout_height="@dimen/ed_high"
+                android:textSize="@dimen/ed_highht"
                 android:background="@drawable/back_text"
                 android:gravity="center"
+                android:textColor="@color/md_green_300"
                 android:text="0"/>
         </LinearLayout>
 
